@@ -1,0 +1,47 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+
+
+        Console.Write("Введите x: ");
+        double x = double.Parse(Console.ReadLine());
+
+        Console.Write("Введите точность e (e < 0.01): ");
+        double e = double.Parse(Console.ReadLine());
+
+        if (e >= 0.01)
+        {
+            Console.WriteLine("Ошибка: точность должна быть меньше 0.01");
+            return;
+        }
+
+
+        double result = 1.0;
+        double term = 1.0;
+        int n = 1;
+
+        while (Math.Abs(term) >= e)
+        {
+            term *= x / n;
+            result += term;
+            n++;
+        }
+
+        Console.WriteLine($"f({x}) ≈ {result:F6} (точность {e})");
+
+
+        Console.Write("Введите n для вычисления n-го члена: ");
+        int memberN = int.Parse(Console.ReadLine());
+
+        double nthTerm = 1.0;
+        for (int i = 1; i < memberN; i++)
+        {
+            nthTerm *= x / i;
+        }
+
+        Console.WriteLine($"{memberN}-й член ряда: {nthTerm:F6}");
+    }
+}
